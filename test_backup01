@@ -1,0 +1,6 @@
+#!/bin/bash
+#function backup () {
+	newname=$1.$(date +%d-%m%y.bak)
+	mv $1 $newname
+	echo "backup started"
+	cp -p $newname $1
