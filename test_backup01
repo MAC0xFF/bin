@@ -1,6 +1,12 @@
 #!/bin/bash
 #function backup () {
-	newname=$1.$(date +%d-%m%y.bak)
-	mv $1 $newname
+	newname=$1.$(date +%d-%m%y).bak
 	echo "backup started"
-	cp -p $newname $1
+	cp -p $1 $newname
+
+
+for i [in *.sh]; do
+	newname=$i.$(date +%d-%m%y).bak
+	echo "backup started"
+	cp -p $i $newname
+done
