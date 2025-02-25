@@ -1,4 +1,8 @@
-ping
+#rdesktop IP -u username -p 3389
+#DNS poisoning
+#printf "%s %d\n" "Number of live hosts:" 15 %x
+
+ping 8.8.8.8 -c1
 traceroute -T/I
 ip -br a
 ip neigh # отображает содержимое кеша ARP или ND
@@ -8,11 +12,19 @@ ip r add IP/24 via name.net #добавить маршрут в сеть
 ip r add/del IP/24 via IP dev eth1
 ip r add default via IP dev ethO #0.0.0.0/0 any addr
 ip r show
-netstat -nr
+
+#netstat -nr -antu
 ip route flush #init route_tab
 ss -tlpn
 netstat -r
 
+wget
+curl -O
+curl -A Mozilla url && wget -U Mozilla url
+curl url | .. | xargs -n1 wget 
+/etc/host
+host 8.8.8.8
+host google.com
 ipcalc IP/netmask
 obase=2;256 | bc
 
@@ -41,14 +53,7 @@ ps auxwwww | grep nginx
 #/etc/httpd/envvars
 #export APACHE_RUN_USER=www-data =>=sftpuser
 #service apache2 restart
-find /var/www -type d -exec chmod 755 {} \;
-find /var/www -type f -exec chmod 644 {} \;
 chown -R sftpuser:www-data /var/www/
-wget
-
-curl -A Mozilla url && wget -U Mozilla url
-curl url | .. | xargs -n1 wget 
-
 
 #сброс пароля root
 mount -o rw /dev/vda1 /mnt
@@ -70,11 +75,6 @@ flush privileges;
 /etc/init.d/mysql start
 mysql -u root -p
 #SET PASSWORD FOR 'root'@'localhost' = PASSWORD('пароль')
-
-
-
-
-
 
 ics-dhcp-server
 /etc/dhcpЗ/dhcpd.conf
