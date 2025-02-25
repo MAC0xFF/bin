@@ -1,0 +1,146 @@
+ping
+traceroute -T/I
+ip -br a
+ip neigh # отображает содержимое кеша ARP или ND
+ip l show 
+ip a add IP/24 dev enp0s5
+ip r add IP/24 via name.net #добавить маршрут в сеть
+ip r add/del IP/24 via IP dev eth1
+ip r add default via IP dev ethO #0.0.0.0/0 any addr
+ip r show
+netstat -nr
+ip route flush #init route_tab
+ss -tlpn
+netstat -r
+
+ipcalc IP/netmask
+obase=2;256 | bc
+
+ftp fileserver
+anonymous
+cd pub/cd_images/ubuntu.iso
+ls
+lsd Desktop
+get ubuntu.iso
+bye/exit
+help
+lftp
+#
+sftp
+useradd -d /var/www/ sftpuser
+passwd sftpuser
+usermod -aG www-data sftpuser
+usermod -g www-data sftpuser
+nano /etc/nginx/nginx.conf
+user www-data; =>user sftpuser;
+service nginx restart
+ps auxwwww | grep nginx
+#/etc/apache2/apache2.conf
+#/etc/apache2/envvars
+#/etc/httpd/httpd.conf
+#/etc/httpd/envvars
+#export APACHE_RUN_USER=www-data =>=sftpuser
+#service apache2 restart
+find /var/www -type d -exec chmod 755 {} \;
+find /var/www -type f -exec chmod 644 {} \;
+chown -R sftpuser:www-data /var/www/
+wget
+
+curl -A Mozilla url && wget -U Mozilla url
+curl url | .. | xargs -n1 wget 
+
+
+#сброс пароля root
+mount -o rw /dev/vda1 /mnt
+chroot /mnt /bin/bash
+passwd root
+umount /mnt
+mount -o ro /dev/vda1 /mnt
+
+#Смена пароля root для MySQL
+/etc/init.d/mysql stop
+nano /etc/mysql/mysql.conf.d/mysqld.cnf
+skip-grant-tables
+service mysql restart
+mysql
+use mysql;
+update user set authentication_string=password('777') where user='root';
+flush privileges;
+\q
+/etc/init.d/mysql start
+mysql -u root -p
+#SET PASSWORD FOR 'root'@'localhost' = PASSWORD('пароль')
+
+
+
+
+
+
+ics-dhcp-server
+/etc/dhcpЗ/dhcpd.conf
+dhcrelay 
+/var/lib/dhcp || /var/lib/dhclient-ethO.leases 
+
+ifdown/ifup
+service network restart
+/etc/network/options
+hostname
+/etc/network/interfaces 
+ethtool eth0
+ethtool -s eth0 speed 100 duplex full
+ethtool -r -k/-K
+
+ls -F /proc/sys/net/ipv4/conf/default
+/etc/nsswitch.conf 
+/etc/resolv.conf
+sudo sh -с "echo 1 >/proc/sys/net/ipv4/icmp_echo_ignore_broadcasts" 
+#sysctl net.ipv4.icmp_echo_ignore_broadcasts=1
+/etc/sysctl.conf
+#net.ipv4.ip_forward=O #отключает пересылку IР-пакетов на хост
+conf.eth0.ip_forward=O
+conf.eth0.accept_redirects=0 #переадресация icmp-packs
+conf.eth0.accept_source_route=0 # routing по адр отправителя
+conf.all.icmp_echo_iqnore_broadcasts=0 #широк проверка связи
+
+man 7 icmp
+ip-sysctl.txt
+#ifconfig IP\24 up
+#ifconfig -a
+#/etc/rc.conf
+
+ping -s1500 IP 
+traceroute -n #отследить причину исчезновения IP-пакетов
+
+
+
+tcpdump # анализатор sniffers прослушивание трафика
+tcpdump -D
+sudo tcpdump -i eth0 -vvv -w/r -s1560 host bull
+sudo tcpdump src net 192.168.1.0/24 and dst port 80
+
+#SmokePing 
+#iperf -s
+#iperf -с IP
+#Cacti
+
+iwconfig
+iwlist scan
+wpa_supplicant
+ss -nr
+ip r
+
+dig +trace
+drill -Т
+host ya.ru
+nslookup
+delv
+dig @a.root-servers.net yandex.ru soa 
+dig @a.dns.ripn.net yandex.ru soa
+dig @ns1.yandex.RU yandex.ru soa
+dig @ns1.yandex.RU www.yandex.ru any
+dig @f.root-servers.net.ns > root.cache
+dig . ns > root.cache
+drill -S -k ksk.keyfile example.net SOA
+
+sudo rndc stop
+sudo /usr/sbin/named
