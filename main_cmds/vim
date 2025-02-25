@@ -34,7 +34,8 @@ vim $(find . -type f -print0 | xargs -0 grep -l string)
 
 #===============================
 #tmux
-^b , C %” 0 [
+^B+, ^B+C ^B+% ^B+" ^B+← ^B+[номер окна] ^B+[+↑ Esc exit
+#touch /etc/tmux.conf
 cat <<EOF>> ~./tmux.conf
 unbind C-b
 set -g prefix C-a
