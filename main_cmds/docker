@@ -34,8 +34,10 @@ WORKDIR /root/
 
 docker run -itd -p 8080:80 –name mutillidae_01 citizenstig/nowasp
 
-
-
+#=====================
+#docker-compose.yml
+docker-compose up -d
+docker-compose down
 
 
   
