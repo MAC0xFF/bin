@@ -1,0 +1,24 @@
+/etc/fstab
+UUID=/dev/sda1 /home ext4 defaults 1 2 # text label
+mount
+umount /dev/sdc
+mount /dev/sdb1 /mnt/drive
+ln -s /mnt/drive ~/Desktop/drive # symlink
+ls -li
+mount -t iso9660 /dev/sdc /mnt/cdrom
+ls /dev
+sudo tail -f /var/log/syslog
+sudo fdisk /dev/sdb # m p l t 83 w
+sudo mkfs -t ext4 /dev/sdb1
+
+sudo fsck /dev/sdb1 #lost+found
+dd if=/dev/cdrom of=ubuntu.iso 
+dd if=~/dir1 of=~/dir2 bs=50mb count=5
+genisoimage -o cd-rom.iso -R -J ~/cd-rom-files
+mount -t iso9660 -o loop image.iso /mnt/iso_image
+wodim dev=/dev/cdrw blank=fast
+wodim dev=/dev/cdrw image.iso
+md5sum image.iso
+md5sum /dev/cdrom
+md5sum dvd-image.iso; dd if=/dev/dvd bs=2048 count=$(($(stat -c “%s” dvd-image.iso) / 2048)) | md5sum
+запись на оптические носители выполняется блоками по 2048 байт; проверка целостности файла образа и диска в устройстве привода DVD
