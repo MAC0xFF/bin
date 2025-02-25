@@ -4,11 +4,15 @@ sudo vim /etc/ssh/sshd_config
     PasswordAuthentication no
     PermitRootLogin no
 sudo service ssh restart
-sudo systemctl enable ssh
+sudo systemctl enable/restart ssh
 
 ssh tom@192.168.0.102 -p 22
-scp tom@192.168.0.102:~/dir1/f.txt .
-scp f.txt 192.168.0.102:
+ssh IP ls > outfile
+ssh IP 'ls > outfile'
+ssh IP 'ls' \> outfile
+echo 'ls > outfile' | -T ssh user@IP bash
+scp IP:~/dir1/f.txt .
+scp f.txt IP:
 
 sudo apt install -y openssh-server openssh-client
 ssh-keygen -t rsa -b 4096
@@ -19,16 +23,9 @@ type $env:USERPROFILE\.ssh\id_rsa.pub | ssh user@server "cat >> ~/.ssh/authorize
 ssh root@IP -vvv #log
 sudo journalctl -u ssh
 ssh localhost
-ssh bob@IP 'ls' > outfile
-ssh bob@IP 'ls' > outfile’
-ssh bob@IP 'ls' \> outfile
+
 ssh -X remote-sys
 xload
-scp IP:f1 .
-scp f1 IP:
-sudo systemctl restart sshd
-
-
 
 ssh-add; ssh-agent
 ssh-keyscan
