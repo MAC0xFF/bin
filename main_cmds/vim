@@ -1,0 +1,54 @@
+echo "set nocp" >> ~/.vimrc
+:set number
+:set vm=10
+:syntax on
+:set hlsearch
+:set tabstop=4
+:set autoindent # ^D
+
+^aefbldtkuy M-fbtlud 
+
+:%!xxd [-r]
+:%!Base64 [-r]
+ZZ :wq :q! iaA oO
+xp #^t
+lhjk0^$wWbB 
+^f^b G/1G
+5~ 5. w~ #Mc Mu Ml
+r. R
+xX #^d
+yy p P J f ; / n :%s/a/A/gc
+dd b dW d$ db  dG D d^ #Md 
+cc cw c$ c0
+#^u ^k ^e ^u
+uU ^R
+:bn :bp :buffers :buffer 2 :e f2 :r f1
+:vsplit f1 ^ww
+v V”ay V”by “ap “bp
+
+less; v
+VISUAL=emacs
+EDITOR=emacs
+vim $(grep -lr string .)
+vim $(find . -type f -print0 | xargs -0 grep -l string)
+
+#===============================
+#tmux
+^b , C %” 0 [
+cat <<EOF>> ~./tmux.conf
+unbind C-b
+set -g prefix C-a
+bind C-a send-prefix
+EOF
+#===============================
+
+history 3
+!! | grep -w cd
+history -c
+!-3:p; !!
+ls *.txt; rm !$
+^R; ^RR ^J
+set -o vim
+^jg^gpg
+!55:s/jg/gpg
+
