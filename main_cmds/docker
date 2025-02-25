@@ -1,0 +1,43 @@
+sudo apt update && sudo apt install docker.io -y
+sudo usermod -aG docker
+service docker restart
+echo 'PermitRootLogin yes' >>/etc/ssh/sshd_config 
+service ssh restart
+
+docker pull kalilinux/kali
+docker images
+#docker search <image>
+#docker push <image>
+docker rmi 
+docker ps -a
+docker run -it -d --name kali_01 -v /home/tom:/root -p 2222:22 <image>
+docker exec -it kali_01 /bin/bash
+docker inspect Kali_01 | grep IPAddress
+docker inspect -f "{{ .NetworkSettings.IPAddress }}" kali_01
+docker network inspect bridge
+
+docker build -t kali_custom .
+
+#Dockerfile
+FROM kalilinux/kali
+RUN apt update && apt upgrade -y
+RUN apt-get install -y \
+  nmap \
+  metasploit-framework \
+  sqlmap \
+  gobuster \
+  wordlists \
+  nfs-common \
+  cifs-utils \
+  git \
+  && apt-get clean
+RUN git clone https://github.com/danielmiessler/SecLists.git /opt/seclists
+WORKDIR /root/
+
+docker run -itd -p 8080:80 –name mutillidae_01 citizenstig/nowasp
+
+
+
+
+
+  
