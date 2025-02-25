@@ -1,4 +1,4 @@
-#echo ‘export PATH=~/bin:$PATH:.’ >>~/.bashrc 
+#echo 'export PATH=~/bin:$PATH:.' >>~/.bashrc 
 #source ~/.bashrc; . ~/.bashrc
 #~/bin/sys_info_page >sys_info_page.html && firefox .. &
 #========================
