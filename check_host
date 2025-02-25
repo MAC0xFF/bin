@@ -1,0 +1,18 @@
+#!/bin/bash
+read -p "Enter the IP addresses file name / path:" FILE_PATH
+function check_host(){
+    if [[ -n $IP ]]; then
+        ping_cmd=$(nmap -sn $IP | grep 'Host is up' | cut -d'(' -f1)
+        if [[ -z $ping_cmd ]]; then
+            printf "$IP is down\n"
+        else
+            printf "$IP is up\n"
+            dns_name
+        fi
+    fi
+}
+function dns_name(){
+    dns_name=$(host $IP)
+    printf "$dns_name\n"
+}
+for ip in $(cat $FILE_PATH); do IP=$ip; check_host; done
