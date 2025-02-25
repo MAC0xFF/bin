@@ -1,0 +1,62 @@
+timedatectl set-timezone Europe/Moscow
+
+cat /var/log/syslog(auth.log) | grep sudo 
+
+tail -f /var/log/nginx/access.log | awk 
+'{print NR" "$1"\t"substr($4,14,5)"\t"$9"\t"$13" "$14" "$15}'
+
+| awk ‘$9==304 {print NR \’\t\’ \[$1\] substr($7,14,5)}’ 
+| sort | uniq -c | sort -nr
+
+logger -t $(tput setaf 1) hello ‘###’ #event=>rsyslog
+journalctl -t hello -g h..l* #tag; regex
+
+#===================================
+
+#sudo kill -HUP /bin/cat /var/run/syslogd.pid
+man 5 rsylog.conf
+/etc/rsyslog.conf 
+#/etc/rsyslog.d/50-default.conf #rules for rsyslog
+#log by (object/facility/src.priority/severity)
+kern,cron.debug      mail.=info      mail.!notice 
+warn    err    *.crit     mark,daemon.alert      syslog.emerg 
+*.*;auth,authpriv.none    	-/var/log/syslog
+#все объекты и все приоритеты, кроме auth,authpriv
+#предварительная буферизация до записи в конфиг
+/etc/logrotate.conf #ротация логов
+/etc/logrotate.d
+#
+im-input module; om; mm-modify msg
+imjournal inuxsock imklog imfile/omfile omfwd
+omkafka/omelasticksearch/ommysql
+#RainerScript
+
+журнал собирает и индексирует сообщения из нескольких src
+socket /dev/log; /dev/kmsg; socket /run/systemd/journal/syslog
+
+journalctl --setup-keys 
+#FSS-forward secure sealing-integrity msg
+usermod -aG systemd-jounal
+journalctl --disk-usage
+journalctl --list-boots
+journalctl -b 0 -u ssh
+journalctl -u ntp
+journalctl -n15 --since=yesterday --until=now
+journalctl -n10 /usr/sbin/sshd #--help
+journalctl -f #tail -f
+systemd-journal-remote/gateway/upload
+journalctl --system -n 10 --file --user -D dir #syslog
+journalctl --since "2024-03-20 16:30:20"
+journalctl -S 2024-03-20
+journalctl --until YYYY-MM-DD hh:mm:ss
+journalctl -S yesterday/today/tomorrow -p err #priority
+journalctl -k #dmesg+iptables
+
+cat <<END> /etc/systemd/journald.conf.d/storage.conf
+[Journal]
+Storage=persistent 
+???ForwardToSyslog=yes #переадресация сокетов, потеря metadata
+END
+#systemctl restart systemd-journald
+systemd-journal.fields
+last #wtmp
