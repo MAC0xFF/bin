@@ -1,1 +1,49 @@
+#local/remote repo
+#.gitignore
+git config --global user.name “Fistname Secondname”
+git config --global user.email “name@mail.ro”
+git config -l
+#~/.gitconfig
+#mkdir dir1 && git init . # git bd create
+
+git clone ..
+git checkout -b fix_error 
+
+git add .  
+git commit -m "v01" 
+git push
+
+git push --set-upstream tom_task001
+git checkout master
+git branch -d tom_task001
+git push --delete tom_task001
+git status
+git log [-1 -p]
+git restore ..
+git diff --staged
+git remote -v
+git remote set-url origin ..ssh
+
+git branch
+#git branch fix_error
+#git merge fix_error 
+
+git checkout <hash>
+git checkout master
+git --amend 
+git reset --hard HEAD~1
+git push origin main --force
+git reset --soft HEAD~2
+
+git log --pretty=oneline
+git tag v1.0
+git tag -a v1.0 <hash>
+git tag -d v1.0
+git tag
+git push origin v1.0
+git push origin --tags
+git push origin --delete v1.0
+git pull
+git checkout v1.0
+
 
