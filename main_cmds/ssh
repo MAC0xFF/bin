@@ -7,11 +7,10 @@ sudo service ssh restart
 sudo systemctl enable ssh
 
 ssh tom@192.168.0.102 -p 22
+scp tom@192.168.0.102:~/dir1/f.txt .
+scp f.txt 192.168.0.102:
 
-scp
-scp
-
-sudo apt install openssh-server openssh-client
+sudo apt install -y openssh-server openssh-client
 ssh-keygen -t rsa -b 4096
 cat ~/.ssh/id_rsa.pub
 ssh-copy-id user@server #~/.ssh/authorized_keys on server
