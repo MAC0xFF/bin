@@ -1,0 +1,50 @@
+openssl genrsa -out key.pem -aes-256-cfb -rand /var/log/messages 4096 #private.key
+openssl rsa -in privatkey.pem -pubout -out publickey.pem
+
+openssl rand -base64 32 > key.bin
+openssl enc -aes-256-cfb -salt -in f.pdf -out f.pdf.enc -pass file:./key.bin
+openssl rsautl -encrypt -inkey publickey.pem -pubin -in key.bin -out key.bin.enc
+shred -u key.bin
+openssl rsautl -decrypt -inkey privatkey.pem -in key.bin.enc -out key.bin
+openssl enc -d -aes-256-cfb -in f.pdf.enc -out f.decrypt.pdf -pass file:./key.bin
+
+openssl rsautl -encrypt -inkey publickey.pem -pubin -in f.pdf -out f.pdf.enc
+openssl rsautl -decrypt -inkey privatkey.pem -in text.txt.enc -out text.txt
+openssl enc -base64 -in text.txt.enc -out text.txt.bs64
+openssl enc -base64 -d -in text.txt.bs64 -out text.txt.enc
+
+openssl req -new - sha256 -key admin.com.key -out adm.com.csr
+openssl х509 -noout -text -in google.com.pem
+openssl s_client -connect www.google.com:443 -showcerts
+
+#==========================================================
+
+gpg --full-gen-key --expert
+    ~/.gnupg/gpg.conf
+    keyid-format 0xlong
+    throw-keyids
+    no-emit-version
+    no-comments
+gpg -k
+
+gpg -K
+gpg -e -a -r <id_key>|mail /tmp/f.txt
+gpg -d -o f.txt f.txt.asc
+gpg --export -a user@mail.ru >public.gpg
+gpg --export-secret-key -a user@mail.ru >secret.gpg
+gpg --delete-keys user@mail.ru
+gpg --delete-secret-keys user@mail.ru
+gpg --import public.gpg
+gpg --import secret.gpg
+
+sudo apt install -y pass
+pass init user@mail.ru
+pass insert Email/gmail.com
+pass
+pass Email/gmail.com
+pass generate Email/mail.com 15
+ls -l ~/.password-store/
+
+pwgen -N 1 -s 96
+echo -n 5ZDxZBCMpVxBkmRp | shasum -a 256
+
