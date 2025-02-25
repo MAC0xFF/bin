@@ -1,8 +1,6 @@
 sudo apt update && sudo apt install docker.io -y
 sudo usermod -aG docker
 service docker restart
-echo 'PermitRootLogin yes' >>/etc/ssh/sshd_config 
-service ssh restart
 
 docker pull kalilinux/kali
 docker images
