@@ -1,0 +1,30 @@
+#/etc/services
+
+21/TCP FTP			       989,990/TCP FTPS 		
+22/TCP SSH/SCP 		     22 SFTP
+23/TCP Telnet 
+25/TCP SMTP 		       465/TCP SMTP поверх SSL (for send)
+53/UDP DNS-запрос 	   53/TCP Передача зоны DNS 
+68/UDP DHCP 
+69/UDP TFTP 
+80/TCP HTTP 		       443 HTTPS (TLS) TCP 
+88/UDP Kerberos  
+110/TCP POP3 		       995/TCP POP3 поверх (for mail receive)
+137-139/TCP/UDP NetBIOS 
+143/TCP IMAP4 		     993/TCP IMAP поверх SSL (for msg access)
+161-162/UDP SNMP 	
+389/TCP LDAP 		       636/TCP LDAP поверх SSL 
+513/TCP rlogin 
+1433/TCP MS-SQL 
+2049/TCP NFS 
+2375/TCP Docker Daemon 
+2483–2484/TCP Oracle DB 
+3306/TCP MySQL 
+3389/TCP RDP 
+5500/TCP VNC 
+5631/TCP PCAnywhere 
+6665–6669/TCP IRC 	   6679,6697/TCP IRC SSL
+6881–6999/TCP BitTorrent 
+9100/TCP Принтеры 
+9800/TCP WebDAV 
+10000 Webmin 
