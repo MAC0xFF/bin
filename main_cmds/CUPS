@@ -1,0 +1,75 @@
+1)CUPS - LPD(lpr); SysV(lp)
+2)Ghostscript - as RIP, interpreter PostScript
+
+CUPS - web-server; cupsd-daemon
+1)spool - Диспетчер печати
+2)user's utilities(cli/gui)send print jobs >cupsd >(print queue); req sys
+3)servers services >printers
+4)net protocol
+http://localhost:631/admin #433; web iface
+IPP (Internet Printing Protocol)
+clients send jobs с помощью операции POST протокола http/IРР и запрашивают их статус с помощью команды GET из того же протокола.
+CUPS проверяет как документ, так и HDD-файл принтера (Postscript Printer Description)
+Для того чтобы подготовить задание к печати на конкретном принтере, CUPS пропускает его через конвейер, состоящий из фильтров(изменять формат задания..) 
+Последним этапом в конвейере печати является внутренний интерфейс, который отправляет задание с хоста на принтер через подходящий протокол, такой как Ethernet.
+Она также отправляет информацию о состоянии обратно на сервер CUPS . Передав за задание на печать, демон CUPS возвращается снова к обработке своих очередей и запросов
+от клиентов. Принтер приступает к работе , пытаясь распечатать переданное ему задание
+серверы CUPS по умолчанию каждые 30с рассылают информацию об обслуживаемых ими принтерах, в локальной сети компьютеры автоматически узнают о доступн принтерах. 
+cupsd # увидеть новые компоненты сети
+выделить в каждой подсети подчиненный сервер-демон, который будет запрашивать информацию о принтерах с серверов в других подсетях и затем рассылать ее машинам в своей локальной подсети
+Allow From IP # сеть из которой принимаются задания на печать
+Когда система CUPS получает подлежащий распечатке файл, она определяет его тип MIME. Затем она проверяет файл PPD и выясняет, какие типы MIME может обрабатывать принтер. После этого с помощью файлов .convs она решает, какая цепочка фильтров может преобразовать один тип в другой и сколько это будет стоить. В заключение она выбирает цепочку и пропускает документ через фильтры. Последний фильтр в цепочке передает серверу пригодный для печати формат,который передает данные
+на принтер либо через аппаратное устройство, либо через протокол, поддерживаемый принтером
+Для распознавания типа поступающих данных CUPS использует правила, указанные в файле
+/etc/cups/mime.types
+application/pdf pdf string (0, %PDF)
+/etc/cups/mime.convs
+последний компонент в конвейере CUPS является фильтр, который непосредственно взаимодействует с принтером 
+В РРD-файле принтера, не поддерживающего язык PostScript 
+*cupsFilter: "application/vnd.cups-postscriptОfoomatic-rip"
+демон запускается во время загрузки и выполняется непрерывно
+система печати считывает конфиг только во время запуска, в gui изменения вступают в силу автоматически
+сервер CUPS уведомляет другие сервера в сети о новом принтере
+
+cupsd
+/etc/cups/cupsd.conf
+BrowsePoll serv1
+BrowsePoll serv1
+BrowseRelay IP IP
+BrowseAddress 192.168.0.255:631
+
+sudo lpadmin -р Canon1 -Е -v parallel:/dev/ lpO -m f.ppd
+sudo lpadmin -р Canon2 -Е -v socket://192.168.0.12 -m f.ppd
+/usr/share/cups/model # PDD-files; URI - идентификаторы
+
+pr -l15 -w50 -n -h header f1
+sudo apt install cups-pdf
+lpstat -a -sdprt
+lpq
+lprm <id> || cancel
+ls | pr -3 -t | lpr -P Canon
+lpr f.pdf
+lp -o page-left=36 -o cpi=12 -o lpi=8 [-o scaling=2] -d Canon
+a2ps -o ~/Desktop/ls.ps -L 66
+
+lpadmin -х Canon1
+sudo cupsdisable/cupsenable Canon #для коротких перерывов
+sudo reject/accept Canon #print jobs, для длительных простоев
+export РRINТЕR=name_printer
+lpoptions -d name_printer
+lpoptions -l
+~/.cups/lpoptions; /etc/cups/lpoptions
+lpoptions -р Canon -о number-up=2 -о job-sheets=standard
+lpr -P Canon f.ps
+cupsfilter foo.txt > foo.pdf
+locate pstops
+lpinfo -v
+lpmove
+lpc
+cups-config
+lppasswd
+systemctl restart org.cups.cupsd.service # daemon restart
+/usr/lib/cups/backend/usb
+telnet host 631
+/usr/share/doc/cups 
+sudo apt install --reinstall cups
