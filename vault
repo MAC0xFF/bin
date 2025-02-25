@@ -15,11 +15,11 @@ fi
 searchstring="$1"
 decrypted=$(gpg -d -q "$DATABASE")
 if [ $? -ne 0 ]; then
->&2 echo "$PROGRAM: could not decrypt $DATABASE"; exit 1
+    >&2 echo "$PROGRAM: could not decrypt $DATABASE"; exit 1
 fi
 match=$(echo "$decrypted" | awk '$3~/^'$searchstring'$/')
 if [ -n "$match" ]; then
-load_password "$match"; exit $?
+    load_password "$match"; exit $?
 fi
 match=$(echo "$decrypted" | awk "/$searchstring/")
 if [ -z "$match" ]; then
