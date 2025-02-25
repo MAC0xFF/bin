@@ -1,0 +1,53 @@
+iptables
+применяет к сетевым пакетам цепочки правил, наборы цепочек образуют таблицы. фильтрация сетевого трафика
+цепочки FORWARD , INPUT и OUTPUT
+каждое правило имеет target АССЕРТ, DROP, REJECT,
+LOG, ULOG, REDIRECT (отправляет пакеты на прокси сервер, трафик сайта через кеш-сервер Squid) , RETURN , MIRROR и QUEUE
+
+iptables -F #сбрасывает все правила из цепочки
+iptables -Р INPUT DROP
+iptables -Р FORWARD DROP
+iptables -А FORWARD -i eth0 -р ANY -j АССЕРТ
+iptables -А FORWARD -d 10.1.1.2 -р tcp --dport 22 -j АССЕРТ
+iptables -А FORWARD -d 10.1.1.2 -р tcp --dport 80 -j АССЕРТ
+iptables -А FORWARD -d 10.1.1.2 -р tcp --dport 443 - j АССЕРТ
+iptables -А INPUT -i eth0 -d 10.1.1.2 -р tcp --dport 22 -j АССЕРТ
+iptables -А INPUT -i lo -d 10.1.1.2 -р ANY -j АССЕРТ
+iptables -А INPUT -i eth0 -d 10.1.1.2 -р icmp --icmp-type 8 -j АССЕРТ
+iptables -А INPUT -р icmp --i cmp - type о - j АССЕРТ
+iptables -А INPUT -р icmp --i cmp - type 3 - j АССЕРТ
+iptables -А INPUT -р icmp --i cmp - type 5 - j АССЕРТ
+iptables -А INPUT -р icmp --i cmp - type 1 1- j АССЕРТ
+iptables -А FORWARD -d 10.1.1.2 -р icmp --icmp-type 0 -j АССЕРТ
+iptables -А FORWARD -d 10.1.1.2 -р icmp --icmp-type 3 -j АССЕРТ
+iptables -А FORWARD -d 10.1.1.2 -р icmp --icmp-type 5 -j АССЕРТ
+iptables -А FORWARD -d 10.1.1.2 -р icmp --icmp-type 11 -j АССЕРТ
+
+таблица nat не предназначена для фильтрации пакетов, ее цепочка PREROUTING особенно полезна для фильтрации, предотвращающей анализа трафика
+iptables -t nat -А PREROUTING -i eth1 -s 10.0.0.0/8 -j DROP
+-s 172.16.0.0/12 192.168.0.0/16 127.0.0.0/8 224.0.0.0/4
+
+iptables -А INPUT -i eth1 - j LOG
+iptables -А FORWARD -i eth1 -j LOG
+
+мы могли бы настроить IP NAT для маскировки частного адресного пространства
+
+место того чтобы
+разрешать определенные входящие службы, брандмауэр для клиентов, подкл ючающихся
+к И нтернету, должен разрешать входящие ответы на запросы кл иентов.
+Простая цепочка состояния FORWARD н иже позволяет всему трафику покидать нашу
+сеть, но разрешает только входящий трафик , связан н ы й с подключе ниями, ин ицииро
+ванными нашими хостами
+
+iptables -А FORWARD - i eth0 -р ANY -j АССЕРТ
+iptables -А FORWARD -m state --state ESTABLISHED, RELATED -j АССЕРТ
+
+iptables -Lv
+
+заставить технологию NAT работать, ON переадресацию IP в ядре, установив var ядра /proc/sys/net/ipv4/ip_forward=1 
+sudo modprobe iptable_nat
+sudo modprobe ip_conntrack
+sudo modprobe ip_conntrack_ftp
+/lib/modules
+/net/netfilter
+iptables -t nat -А POSTROUТING -о eth0 -j SNAT --to 128.138.101.4
