@@ -1,9 +1,10 @@
 updatedb
 locate --regex ‚bin/(bz|gz|zip)'
 #b=512c; w=2c; k=1024c
+
 find ~ -type d/f/b/c/l [-print] | wc -l
 find ~ -type f -name '*.bak' -size +1M -size -2G -delete
-find . -type f/d -iname “*.txt” -exec ls {} \;
+find . -type f/d -iname "*.txt" -exec ls {} \;
 find ~ -type f -name 'foo*' -ok ls '{}' ';'
 find ~ -type f -name 'foo*' -exec ls/rm '{}' \;
 find ~ -type f -name 'foo*' -exec ls '{}' ‘+’
@@ -23,6 +24,7 @@ find /etc -exec echo @ {} @ “;”
 find . -type f -atime -7 
 -mtime
 -maxdepth
+
 touch playground/dir-{001..100}/file-{A..Z}
 find playground -type f -name 'file-B' -exec touch '{}' ';'
 find playground -type f -newer playground/timestamp
