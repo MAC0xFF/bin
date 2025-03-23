@@ -1,1 +1,51 @@
+bash
+compgen -c | wc -lwc
+
+pwd
+mkdir dir1
+rmdir
+rm -rf
+cd ~
+cd -
+cd ../../..
+clear
+ls -lAh
+ls -R
+tree
+ps aux | grep root
+kill -9 PID
+killall
+pstree
+htop
+jobs
+ln -s
+ls -n
+file f1
+touch “file 1” file_1
+>f1
+cat <<EOF>>f1
+less
+mv -r ~/* dir1/dir2
+cp -r
+
+sudo chmod 755 dir1 #permission
+sudo chmod 755
+
+man man
+man -k
+alias
+env
+apropos
+apt
+
+cat /etc/passwd | grep -vi tom | sort -u | sort -nr 
+grep -c
+grep -R word dir1
+awk
+sed
+
+find . -name *.txt -size +2M
+find . -type d -name dir* -delete -print
+
+echo hello world >>f1
 
