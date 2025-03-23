@@ -5,10 +5,10 @@ cat /var/log/syslog(auth.log) | grep sudo
 tail -f /var/log/nginx/access.log | awk 
 '{print NR" "$1"\t"substr($4,14,5)"\t"$9"\t"$13" "$14" "$15}'
 
-| awk ‘$9==304 {print NR \’\t\’ \[$1\] substr($7,14,5)}’ 
+| awk '$9==304 {print NR \'\t\' \[$1\] substr($7,14,5)}' 
 | sort | uniq -c | sort -nr
 
-logger -t $(tput setaf 1) hello ‘###’ #event=>rsyslog
+logger -t $(tput setaf 1) hello '###' #event=>rsyslog
 journalctl -t hello -g h..l* #tag; regex
 
 #===================================
