@@ -2,8 +2,9 @@
 #DNS poisoning
 #printf "%s %d\n" "Number of live hosts:" 15 %x
 
-ping 8.8.8.8 -c1
+ping 8.8.8.8 -c1 -i3
 traceroute -T/I
+
 ip -br a
 ip neigh # отображает содержимое кеша ARP или ND
 ip l show 
@@ -18,10 +19,16 @@ ip route flush #init route_tab
 ss -tlpn
 netstat -r
 
-wget
-curl -O
-curl -A Mozilla url && wget -U Mozilla url
+wget -U Mozilla url
+curl -O -vi ip/domain-name
+curl -A Mozilla -L ya.ru
 curl url | .. | xargs -n1 wget 
+curl https://reqres.in/api/users
+curl -X POST https://reqres.in/api/login -d "email"="eve.holt@reqres.in" -d "password"="cityslicka"
+#
+curl -s http://192.168.0.107:8081/api -d '{  "username": "Tom", "password": "123" }'  |  jq
+arg1=$(curl -s http://192.168.0.107:8081/api -d @mypayload.json | jq .payload -r)
+
 /etc/host
 host 8.8.8.8
 host google.com
@@ -110,8 +117,6 @@ ip-sysctl.txt
 
 ping -s1500 IP 
 traceroute -n #отследить причину исчезновения IP-пакетов
-
-
 
 tcpdump # анализатор sniffers прослушивание трафика
 tcpdump -D
