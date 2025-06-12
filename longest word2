@@ -5,7 +5,8 @@ for i; do
     max_word=
     max_len=0
     for j in $(strings "$i"); do
-      len="$(echo "$j" | wc -c)"
+      #len="$(echo "$j" | wc -c)"
+      len="${#j}"
       if (( len > max_len )); then
         max_len="$len"
         max_word="$j"
