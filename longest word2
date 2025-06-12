@@ -15,3 +15,5 @@ for i; do
     echo "$i: '$max_word' ($max_len characters)"
   fi
 done
+
+#time longest-word2 dirlist-usr-bin.txt
