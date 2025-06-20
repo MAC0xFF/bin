@@ -6,6 +6,7 @@ function Ls-Length {
   ls -1 "$@" | while read fn; do
     printf '%3d %s\n' ${#fn} ${fn}; done | sort -n
 }
+
 (( $# < 1 )) && Usage_Exit 
 sub=$1
 shift
