@@ -6,6 +6,8 @@ REM ENTER
 REM DELAY 200  
 REM STRING Hello World! 
 
+REM java -jar /path -i file.txt -o file.bin
+
 REM Reverse Shell Program
 DELAY 100
 REM Open the Run window
